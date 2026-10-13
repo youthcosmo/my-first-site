@@ -125,9 +125,15 @@ export default function Home() {
           <div>
             프로젝트 경로: <code className="rounded border border-slate-300 bg-white px-2 py-0.5 text-slate-900 font-mono font-bold">d:\스마트텍_2026</code>
           </div>
-          <p className="text-xs sm:text-sm font-bold" style={{ color: "#C84726" }}>
+          <a
+            href="https://my-first-site-umber-pi.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-xs sm:text-sm font-bold underline underline-offset-4 transition-opacity hover:opacity-80"
+            style={{ color: "#C84726" }}
+          >
             [오늘 처음 인터넷에 사이트를 올렸어요!]
-          </p>
+          </a>
         </div>
       </div>
     </main>
