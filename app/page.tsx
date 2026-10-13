@@ -124,6 +124,10 @@ export default function Home() {
         <div className="pt-6 sm:pt-8 text-xs font-bold text-slate-700">
           프로젝트 경로: <code className="rounded border border-slate-400 bg-white px-2 py-0.5 text-slate-950 font-mono font-bold">d:\스마트텍_2026</code>
         </div>
+
+        <p className="text-sm font-bold" style={{ color: "#C84726" }}>
+          [오늘 처음 인터넷에 사이트를 올렸어요!]
+        </p>
       </div>
     </main>
   );
