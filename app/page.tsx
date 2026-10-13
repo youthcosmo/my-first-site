@@ -28,8 +28,13 @@ export default function Home() {
 
         {/* Hero Title, Avatar & Subtitle */}
         <div className="mx-auto flex flex-col items-center justify-center text-center">
-          <h1 className="text-5xl font-black tracking-tight sm:text-6xl md:text-7xl lg:text-8xl leading-tight break-keep text-slate-950">
-            안녕하세요, <span className="text-[#1d4ed8] drop-shadow-sm">COCO</span>입니다
+          <h1 className="flex flex-col items-center gap-3 tracking-tight leading-tight break-keep text-slate-950">
+            <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm">
+              Hello!
+            </span>
+            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-wider sm:tracking-widest text-slate-900 whitespace-nowrap">
+              I&apos;m <span className="text-[#1d4ed8] drop-shadow-sm tracking-normal">COCO</span>!
+            </span>
           </h1>
 
           {/* Cute Girl Bear Avatar with generous breathing room */}
