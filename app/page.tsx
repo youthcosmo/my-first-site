@@ -7,6 +7,7 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -37,17 +38,41 @@ export default function Home() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.message.trim()) {
       alert("이름과 문의 내용을 입력해주세요.");
       return;
     }
-    // 제출 완료 상태로 전환
-    setIsSubmitted(true);
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "이메일 전송에 실패했습니다.");
+      }
+
+      // 전송 완료 화면 표시
+      setIsSubmitted(true);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "전송 중 오류가 발생했습니다.";
+      alert(`문의 전송 중 오류가 발생했습니다:\n${msg}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const closeModal = () => {
+    if (isSubmitting) return;
     setIsModalOpen(false);
     // 닫힐 때 폼 초기화 (지연 처리로 부드럽게)
     setTimeout(() => {
@@ -317,15 +342,27 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={closeModal}
-                      className="rounded-lg border border-slate-300 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
+                      disabled={isSubmitting}
+                      className="rounded-lg border border-slate-300 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       취소
                     </button>
                     <button
                       type="submit"
-                      className="rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 px-5 py-2.5 text-xs font-bold text-white shadow-sm shadow-rose-500/30 hover:from-rose-600 hover:to-pink-600 transition-all hover:shadow active:scale-95 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 px-5 py-2.5 text-xs font-bold text-white shadow-sm shadow-rose-500/30 hover:from-rose-600 hover:to-pink-600 transition-all hover:shadow active:scale-95 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      문의 남기기
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>전송 중...</span>
+                        </>
+                      ) : (
+                        <span>문의 남기기</span>
+                      )}
                     </button>
                   </div>
                 </form>
