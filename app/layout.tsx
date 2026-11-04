@@ -2,8 +2,31 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "스마트텍 2026 - Next.js",
-  description: "Next.js + TypeScript + Tailwind CSS App Router 프로젝트",
+  metadataBase: new URL("https://www.luckycoco.xyz"),
+  title: "luckycoco",
+  description: "오늘도 행복하세요!",
+  openGraph: {
+    title: "luckycoco",
+    description: "오늘도 행복하세요!",
+    url: "https://www.luckycoco.xyz",
+    siteName: "luckycoco",
+    images: [
+      {
+        url: "/happy-duck.jpg",
+        width: 1200,
+        height: 630,
+        alt: "luckycoco",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "luckycoco",
+    description: "오늘도 행복하세요!",
+    images: ["/happy-duck.jpg"],
+  },
   verification: {
     google: "7i-2bYg2eLxeWKD0tAn4bfkgd3X3egZYdoizP3O5-wM",
     other: {
