@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: "luckycoco",
     images: [
       {
-        url: "/happy-duck.jpg",
+        url: "/bear-avatar.jpg",
         width: 1200,
         height: 630,
         alt: "luckycoco",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "luckycoco",
     description: "오늘도 행복하세요!",
-    images: ["/happy-duck.jpg"],
+    images: ["/bear-avatar.jpg"],
   },
   verification: {
     google: "7i-2bYg2eLxeWKD0tAn4bfkgd3X3egZYdoizP3O5-wM",
